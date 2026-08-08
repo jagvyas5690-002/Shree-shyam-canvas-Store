@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Shree Shyam Canvas Store | Bikaner</title>
+  <meta name="description" content="Shree Shyam Canvas Store - Tarpaulin, PVC Mats, Green Net, Ropes, Tent Matting and more.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f7f7f7;
+      color: #222;
+    }
+
+    /* HEADER */
+    header {
+      background: #111;
+      color: white;
+      padding: 14px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-circle {
+      width: 45px;
+      height: 45px;
+      border: 2px solid #d4af37;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d4af37;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .logo-text h2 {
+      color: #d4af37;
+      font-size: 19px;
+    }
+
+    .logo-text span {
+      color: #fff;
+      font-size: 11px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #d4af37;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 78vh;
+      background:
+        linear-gradient(rgba(0,0,0,0.68), rgba(0,0,0,0.68)),
+        linear-gradient(135deg, #333, #111);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 40px 20px;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      color: #d4af37;
+      margin-bottom: 15px;
+    }
+
+    .hero h2 {
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #eee;
+    }
+
+    .buttons {
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 24px;
+      margin: 6px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-gold {
+      background: #d4af37;
+      color: #111;
+    }
+
+    .btn-dark {
+      border: 2px solid #d4af37;
+      color: #d4af37;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    /* SECTION */
+    section {
+      padding: 65px 6%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 34px;
+      color: #111;
+    }
+
+    .section-title span {
+      color: #d4af37;
+    }
+
+    .section-title p {
+      margin-top: 10px;
+      color: #666;
+    }
+
+    /* ABOUT */
+    .about {
+      background: white;
+    }
+
+    .about-box {
+      max-width: 950px;
+      margin: auto;
+      text-align: center;
+      line-height: 1.8;
+      color: #555;
+      font-size: 17px;
+    }
+
+    /* PRODUCTS */
+    .products {
+      background: #f5f5f5;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: 0.3s;
+      border: 1px solid #eee;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .product-icon {
+      height: 130px;
+      background: linear-gradient(135deg, #222, #444);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+
+    .product-info {
+      padding: 18px;
+      text-align: center;
+    }
+
+    .product-info h3 {
+      font-size: 17px;
+      margin-bottom: 12px;
+    }
+
+    .product-info a {
+      display: inline-block;
+      background: #111;
+      color: #d4af37;
+      padding: 8px 15px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    /* WHY US */
+    .why-us {
+      background: white;
+    }
+
+    .features {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      text-align: center;
+      padding: 25px 15px;
+      border-radius: 12px;
+      background: #fafafa;
+      border: 1px solid #eee;
+    }
+
+    .feature-icon {
+      font-size: 35px;
+      margin-bottom: 12px;
+    }
+
+    .feature h3 {
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* CONTACT */
+    .contact {
+      background: #111;
+      color: white;
+    }
+
+    .contact .section-title h2 {
+      color: white;
+    }
+
+    .contact-box {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .contact-card {
+      text-align: center;
+      padding: 25px;
+      border: 1px solid #333;
+      border-radius: 12px;
+    }
+
+    .contact-card .icon {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .contact-card h3 {
+      color: #d4af37;
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      color: #ddd;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* CTA */
+    .cta {
+      background: #d4af37;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .cta h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      margin-bottom: 20px;
+    }
+
+    .cta .btn {
+      background: #111;
+      color: #d4af37;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #080808;
+      color: #aaa;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: #d4af37;
+    }
+
+    /* WHATSAPP */
+    .whatsapp {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25D366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 29px;
+      text-decoration: none;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      header {
+        padding: 12px 4%;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        min-height: 70vh;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .hero h2 {
+        font-size: 21px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      section {
+        padding: 50px 5%;
+      }
+
+      .section-title h2 {
+        font-size: 28px;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .product-icon {
+        height: 100px;
+        font-size: 42px;
+      }
+
+      .product-info {
+        padding: 12px 7px;
+      }
+
+      .product-info h3 {
+        font-size: 14px;
+      }
+
+      .product-info a {
+        font-size: 11px;
+        padding: 7px 11px;
+      }
+
+      .features {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .logo-text h2 {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <div class="logo-circle">SS</div>
+      <div class="logo-text">
+        <h2>Shree Shyam</h2>
+        <span>Canvas Store</span>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+
+      <h1>Shree Shyam Canvas Store</h1>
+
+      <h2>Quality Products • Best Service • Trusted Store</h2>
+
+      <p>
+        Tarpaulin, PVC Flooring, Green Net, Ropes, Mats,
+        Tent Matting, Bags और बहुत सारे products
+        एक ही जगह पर।
+      </p>
+
+      <div class="buttons">
+        <a href="#products" class="btn btn-gold">
+          🛍️ हमारे Products
+        </a>
+
+        <a href="#contact" class="btn btn-dark">
+          📞 Contact करें
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+
+    <div class="section-title">
+      <h2>हमारे <span>बारे में</span></h2>
+      <p>Shree Shyam Canvas Store</p>
+    </div>
+
+    <div class="about-box">
+
+      <p>
+        <strong>Shree Shyam Canvas Store</strong> में आपको
+        Tarpaulin, PVC Products, Mats, Nets, Ropes,
+        Bags और Tent से जुड़े कई प्रकार के products
+        मिलते हैं।
+      </p>
+
+      <p>
+        हमारा उद्देश्य है कि customers को अच्छी quality
+        के products उचित कीमत पर उपलब्ध करवाए जाएं।
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- PRODUCTS -->
+  <section class="products" id="products">
+
+    <div class="section-title">
+      <h2>हमारे <span>Products</span></h2>
+      <p>हमारे यहाँ उपलब्ध प्रमुख products</p>
+    </div>
+
+
+    <div class="product-grid">
+
+      <div class="product-card">
+        <div class="product-icon">🟢</div>
+        <div class="product-info">
+          <h3>Green Net</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🕊️</div>
+        <div class="product-info">
+          <h3>Bird Net</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🪢</div>
+        <div class="product-info">
+          <h3>Ropes</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🏕️</div>
+        <div class="product-info">
+          <h3>Tripal</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🚪</div>
+        <div class="product-info">
+          <h3>Door Mat</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🎒</div>
+        <div class="product-info">
+          <h3>School Bags</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🦟</div>
+        <div class="product-info">
+          <h3>Machardani</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🛏️</div>
+        <div class="product-info">
+          <h3>Pillow</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🧘</div>
+        <div class="product-info">
+          <h3>Yoga Mat</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🟫</div>
+        <div class="product-info">
+          <h3>Chatai</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🏠</div>
+        <div class="product-info">
+          <h3>PVC Floor Sheets</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🧱</div>
+        <div class="product-info">
+          <h3>PVC Wall Stickers</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🟦</div>
+        <div class="product-info">
+          <h3>Tarpaulin Plastic</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product-card">
+        <div class="product-icon">🛍️</div>
+        <div class="product-info">
+          <h3>Tarpaulin Bags</h3>
+          <a href="#contact">Enquire Now</a>
+        </div>
+      </div>
+
+
+      <div class="product
