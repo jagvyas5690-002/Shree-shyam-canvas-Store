@@ -1,543 +1,92 @@
-<!DOCTYPE html>
+from pathlib import Path
+import shutil, zipfile
+
+out = Path("/mnt/data/shree-shyam-final-site")
+out.mkdir(exist_ok=True)
+
+html = r'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shree Shyam Canvas Store | Bikaner</title>
-
+<title>Shree Shyam Canvas Store</title>
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#050505;
-    color:white;
-    font-family:Arial, sans-serif;
-}
-
-/* TOP IMAGE */
-.home-image{
-    width:100%;
-    display:block;
-    background:#000;
-}
-
-.home-image img{
-    width:100%;
-    height:auto;
-    display:block;
-}
-
-/* PRODUCTS */
-.products{
-    padding:35px 18px 20px;
-    max-width:1550px;
-    margin:auto;
-}
-
-.title{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.title h2{
-    color:#f2bd28;
-    font-family:Georgia,serif;
-    font-size:34px;
-    letter-spacing:1px;
-}
-
-.title p{
-    color:#ccc;
-    margin-top:7px;
-    font-size:15px;
-}
-
-.line{
-    width:90px;
-    height:3px;
-    background:#f2bd28;
-    margin:10px auto;
-}
-
-/* PRODUCT GRID */
-.product-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:12px;
-}
-
-.product{
-    background:#111;
-    border:1px solid #765a16;
-    border-radius:7px;
-    overflow:hidden;
-    transition:.3s;
-}
-
-.product:hover{
-    transform:translateY(-5px);
-    border-color:#ffd84d;
-    box-shadow:0 5px 20px rgba(242,189,40,.18);
-}
-
-.product-image{
-    height:150px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:55px;
-}
-
-.product-name{
-    text-align:center;
-    padding:11px 5px;
-    font-size:14px;
-    font-weight:bold;
-    background:#080808;
-}
-
-.product-name span{
-    color:#f2bd28;
-}
-
-/* PRODUCT BACKGROUNDS */
-.p1{background:linear-gradient(135deg,#14883c,#063b1c)}
-.p2{background:linear-gradient(135deg,#ddd,#555)}
-.p3{background:linear-gradient(135deg,#d1a15b,#493018)}
-.p4{background:linear-gradient(135deg,#087be5,#003d82)}
-.p5{background:linear-gradient(135deg,#9a5035,#292929)}
-.p6{background:linear-gradient(135deg,#253e5d,#101722)}
-.p7{background:linear-gradient(135deg,#d9eff9,#6394ad)}
-.p8{background:linear-gradient(135deg,#fff,#aaa)}
-.p9{background:linear-gradient(135deg,#8630a9,#2549a0)}
-.p10{background:linear-gradient(135deg,#c49b59,#543818)}
-.p11{background:linear-gradient(135deg,#eee,#999)}
-.p12{background:linear-gradient(135deg,#ddd,#aaa)}
-.p13{background:linear-gradient(135deg,#087bdc,#003c78)}
-.p14{background:linear-gradient(135deg,#1d9c67,#06442d)}
-.p15{background:linear-gradient(135deg,#333,#050505)}
-.p16{background:linear-gradient(135deg,#eee,#aaa)}
-.p17{background:linear-gradient(135deg,#96364d,#176c3d)}
-.p18{background:linear-gradient(135deg,#348a42,#103b18)}
-.p19{background:linear-gradient(135deg,#43b82d,#126817)}
-.p20{background:linear-gradient(135deg,#168d46,#064b24)}
-
-/* FEATURES */
-.features{
-    max-width:1500px;
-    margin:30px auto 0;
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    border:1px solid #765a16;
-}
-
-.feature{
-    padding:20px 10px;
-    text-align:center;
-    border-right:1px solid #765a16;
-}
-
-.feature:last-child{
-    border-right:0;
-}
-
-.feature h3{
-    color:#f2bd28;
-    font-size:15px;
-    margin-bottom:7px;
-}
-
-.feature p{
-    color:#bbb;
-    font-size:12px;
-}
-
-/* CONTACT */
-.contact{
-    max-width:1500px;
-    margin:25px auto;
-    padding:0 15px;
-}
-
-.contact-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr 2fr;
-    border:1px solid #765a16;
-}
-
-.contact-box{
-    padding:20px;
-    min-height:110px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    border-right:1px solid #765a16;
-}
-
-.contact-box:last-child{
-    border-right:0;
-}
-
-.icon{
-    width:52px;
-    height:52px;
-    min-width:52px;
-    border:2px solid #f2bd28;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:23px;
-}
-
-.contact-box h3{
-    color:#f2bd28;
-    margin-bottom:6px;
-}
-
-.contact-box p{
-    color:#ddd;
-    font-size:13px;
-    line-height:1.5;
-}
-
-.direction{
-    margin-left:auto;
-    background:#f2bd28;
-    color:#000;
-    padding:12px 18px;
-    border-radius:5px;
-    font-weight:bold;
-}
-
-/* FOOTER */
-footer{
-    border-top:1px solid #765a16;
-    margin-top:25px;
-    padding:25px 20px;
-    text-align:center;
-}
-
-footer h2{
-    color:#f2bd28;
-    font-family:Georgia,serif;
-}
-
-footer p{
-    color:#aaa;
-    margin-top:7px;
-    font-size:13px;
-}
-
-/* WHATSAPP */
-.whatsapp{
-    position:fixed;
-    right:18px;
-    bottom:18px;
-    width:60px;
-    height:60px;
-    background:#20c764;
-    border:2px solid white;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    z-index:999;
-}
-
-/* MOBILE */
-@media(max-width:900px){
-
-    .product-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-    .features{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .contact-grid{
-        grid-template-columns:1fr;
-    }
-
-    .contact-box{
-        border-right:0;
-        border-bottom:1px solid #765a16;
-    }
-}
-
-@media(max-width:600px){
-
-    .products{
-        padding:25px 10px;
-    }
-
-    .title h2{
-        font-size:27px;
-    }
-
-    .product-grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:8px;
-    }
-
-    .product-image{
-        height:125px;
-        font-size:45px;
-    }
-
-    .product-name{
-        font-size:11px;
-    }
-
-    .features{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .feature{
-        padding:15px 5px;
-    }
-
-    .feature h3{
-        font-size:12px;
-    }
-
-    .feature p{
-        font-size:10px;
-    }
-
-    .contact-box{
-        padding:15px;
-    }
-
-    .direction{
-        display:none;
-    }
-}
+*{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#050505;color:#fff}
+:root{--gold:#f3b91f;--green:#18c45b;--border:#7c5c12}
+a{text-decoration:none;color:inherit}
+header{background:#050505;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.nav{max-width:1500px;margin:auto;min-height:90px;padding:8px 35px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px}.brand img{width:68px;height:68px;object-fit:contain}
+.brand h1{font:700 27px Georgia;color:var(--gold)}.brand p{text-align:center;font-size:11px;letter-spacing:4px}
+.links{display:flex;gap:35px}.links a:hover{color:var(--gold)}
+.top{display:flex;align-items:center;gap:20px}.wa{background:var(--green);padding:13px 20px;border-radius:7px;font-weight:bold}
+.hero{max-width:1500px;margin:auto;display:grid;grid-template-columns:42% 58%;min-height:500px}
+.heroText{padding:55px;display:flex;flex-direction:column;justify-content:center}
+.welcome{font:italic 38px cursive;color:var(--gold)}
+.hero h2{font-size:54px;line-height:1.03;margin-top:5px}.hero h2 span{color:var(--gold)}
+.line{width:90px;height:3px;background:var(--gold);margin:23px 0}
+.hero p{max-width:500px;color:#ddd;line-height:1.6;font-size:17px}
+.btns{display:flex;gap:18px;margin-top:25px}.btn{padding:14px 24px;border-radius:7px;font-weight:bold}
+.call{background:var(--gold);color:#111}.heroImg{min-height:500px}.heroImg img{width:100%;height:100%;object-fit:cover;display:block}
+.products{max-width:1500px;margin:auto;padding:25px 18px}.title{text-align:center;margin-bottom:18px}.title h2{color:var(--gold);font:700 31px Georgia}.title p{color:#ccc;margin-top:5px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.card{background:#0d0d0d;border:1px solid var(--border);border-radius:7px;overflow:hidden}.card img{width:100%;height:145px;object-fit:cover;display:block}.card b{display:block;padding:10px;text-align:center;font-size:14px}
+.features{max-width:1500px;margin:5px auto 20px;display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--border)}
+.feature{text-align:center;padding:18px 8px;border-right:1px solid var(--border)}.feature:last-child{border:0}.feature strong{color:var(--gold);display:block}.feature small{color:#bbb}
+.contact{max-width:1500px;margin:auto;padding:15px}.contactGrid{display:grid;grid-template-columns:1fr 1fr 2fr;border:1px solid var(--border)}
+.box{padding:20px;display:flex;gap:15px;align-items:center;border-right:1px solid var(--border)}.box:last-child{border:0}.box h3{color:var(--gold);margin-bottom:5px}.box p{color:#ddd;line-height:1.5;font-size:14px}
+footer{max-width:1500px;margin:auto;border-top:1px solid var(--border);padding:20px 35px;display:flex;justify-content:space-between;align-items:center}.copy{color:#aaa;font-size:12px}
+.float{position:fixed;right:18px;bottom:18px;background:var(--green);width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;border:2px solid white}
+@media(max-width:900px){.links{display:none}.hero{grid-template-columns:1fr}.heroText{padding:35px 25px}.hero h2{font-size:42px}.heroImg{min-height:300px}.grid{grid-template-columns:repeat(2,1fr)}.features{grid-template-columns:repeat(2,1fr)}.contactGrid{grid-template-columns:1fr}.box{border-right:0;border-bottom:1px solid var(--border)}footer{flex-direction:column;gap:12px;text-align:center}}
 </style>
 </head>
-
 <body>
+<header><div class="nav">
+<div class="brand"><img src="shree-shyam-logo.png"><div><h1>SHREE SHYAM</h1><p>CANVAS STORE</p></div></div>
+<div class="links"><a href="#home">Home</a><a href="#products">Products</a><a href="#about">About Us</a><a href="#contact">Contact</a></div>
+<div class="top"><b>📞 8000379250</b><a class="wa" href="https://wa.me/918000379250">🟢 WhatsApp Us</a></div>
+</div></header>
 
-<!-- TOP / HERO IMAGE -->
-<section class="home-image">
-    <img src="shyam-home.png" alt="Shree Shyam Canvas Store">
+<section class="hero" id="home">
+<div class="heroText"><div class="welcome">Welcome to</div><h2>SHREE SHYAM<br><span>CANVAS STORE</span></h2><div class="line"></div>
+<p>All types of canvas, tarpaulin, PVC products, nets, mats, bags, ropes, tent matting and many more quality products available at one place.</p>
+<div class="btns"><a class="btn call" href="tel:8000379250">📞 Call Now</a><a class="btn wa" href="https://wa.me/918000379250">🟢 WhatsApp Us</a></div></div>
+<div class="heroImg"><img src="shyam-canvas-store.png" alt="Shree Shyam Canvas Store Showroom"></div>
 </section>
 
+<section class="products" id="products"><div class="title"><h2>OUR PRODUCTS</h2><p>Quality products for home, business, events and outdoor use.</p></div>
+<div class="grid">
+''' + ''.join(f'<div class="card"><img src="products/{i}.png" alt="{name}"><b>{i}. {name}</b></div>' for i,name in enumerate([
+"Green Net","Bird Net","Ropes","Tripal","Door Mat","School Bags","Machardani","Pillow","Yoga Mat","Chatai",
+"PVC Floor Sheets","PVC Wall Stickers","Tarpaulin Plastic","Tarpaulin Bags","American Tarpaulin","Mattress","PVC Spaghetti Mats","Tent Matting","Green Grass","PVC Floor Mat"],1)) + r'''
+</div></section>
 
-<!-- PRODUCTS -->
-<section class="products" id="products">
-
-<div class="title">
-    <div class="line"></div>
-    <h2>OUR PRODUCTS</h2>
-    <p>Quality products for home, business, events and outdoor use.</p>
-    <div class="line"></div>
-</div>
-
-<div class="product-grid">
-
-<div class="product">
-<div class="product-image p1">🌿</div>
-<div class="product-name"><span>1.</span> Green Net</div>
-</div>
-
-<div class="product">
-<div class="product-image p2">🐦</div>
-<div class="product-name"><span>2.</span> Bird Net</div>
-</div>
-
-<div class="product">
-<div class="product-image p3">🪢</div>
-<div class="product-name"><span>3.</span> Ropes</div>
-</div>
-
-<div class="product">
-<div class="product-image p4">🟦</div>
-<div class="product-name"><span>4.</span> Tripal</div>
-</div>
-
-<div class="product">
-<div class="product-image p5">▰</div>
-<div class="product-name"><span>5.</span> Door Mat</div>
-</div>
-
-<div class="product">
-<div class="product-image p6">🎒</div>
-<div class="product-name"><span>6.</span> School Bags</div>
-</div>
-
-<div class="product">
-<div class="product-image p7">🛏️</div>
-<div class="product-name"><span>7.</span> Machardani</div>
-</div>
-
-<div class="product">
-<div class="product-image p8">🛏</div>
-<div class="product-name"><span>8.</span> Pillow</div>
-</div>
-
-<div class="product">
-<div class="product-image p9">🧘</div>
-<div class="product-name"><span>9.</span> Yoga Mat</div>
-</div>
-
-<div class="product">
-<div class="product-image p10">▤</div>
-<div class="product-name"><span>10.</span> Chatai</div>
-</div>
-
-<div class="product">
-<div class="product-image p11">▱</div>
-<div class="product-name"><span>11.</span> PVC Floor Sheets</div>
-</div>
-
-<div class="product">
-<div class="product-image p12">▤</div>
-<div class="product-name"><span>12.</span> PVC Wall Stickers</div>
-</div>
-
-<div class="product">
-<div class="product-image p13">▰</div>
-<div class="product-name"><span>13.</span> Tarpaulin Plastic</div>
-</div>
-
-<div class="product">
-<div class="product-image p14">🛍️</div>
-<div class="product-name"><span>14.</span> Tarpaulin Bags</div>
-</div>
-
-<div class="product">
-<div class="product-image p15">▰</div>
-<div class="product-name"><span>15.</span> American Tarpaulin</div>
-</div>
-
-<div class="product">
-<div class="product-image p16">🛏️</div>
-<div class="product-name"><span>16.</span> Mattress</div>
-</div>
-
-<div class="product">
-<div class="product-image p17">▰</div>
-<div class="product-name"><span>17.</span> PVC Spaghetti Mats</div>
-</div>
-
-<div class="product">
-<div class="product-image p18">▰</div>
-<div class="product-name"><span>18.</span> Tent Matting</div>
-</div>
-
-<div class="product">
-<div class="product-image p19">🌱</div>
-<div class="product-name"><span>19.</span> Green Grass</div>
-</div>
-
-<div class="product">
-<div class="product-image p20">▰</div>
-<div class="product-name"><span>20.</span> PVC Floor Mat</div>
-</div>
-
-</div>
+<section class="features" id="about">
+<div class="feature"><strong>★ PREMIUM QUALITY</strong><small>Best quality products</small></div>
+<div class="feature"><strong>✦ WIDE RANGE</strong><small>All types of canvas products</small></div>
+<div class="feature"><strong>🤝 WHOLESALE & RETAIL</strong><small>For all your needs</small></div>
+<div class="feature"><strong>🚚 FAST SERVICE</strong><small>Quick response</small></div>
+<div class="feature"><strong>₹ BEST PRICES</strong><small>Affordable prices</small></div>
 </section>
 
+<section class="contact" id="contact"><div class="contactGrid">
+<div class="box"><div>📞</div><div><h3>Call Us</h3><p>8000379250<br>Call for product details and prices.</p></div></div>
+<div class="box"><div>🟢</div><div><h3>WhatsApp Us</h3><p>8000379250<br>Message us for quick response.</p></div></div>
+<div class="box"><div>📍</div><div><h3>Our Address</h3><p>Karmishar Fanta, Jaisalmer Road,<br>Bikaner, Rajasthan - 334001</p></div></div>
+</div></section>
 
-<!-- FEATURES -->
-<section class="features">
+<footer><div class="brand"><img src="shree-shyam-logo.png"><div><h1 style="font-size:20px">SHREE SHYAM</h1><p>CANVAS STORE</p></div></div><div>Home &nbsp; | &nbsp; Products &nbsp; | &nbsp; About Us &nbsp; | &nbsp; Contact</div><div class="copy">© 2026 Shree Shyam Canvas Store.</div></footer>
+<a class="float" href="https://wa.me/918000379250">🟢</a>
+</body></html>'''
 
-<div class="feature">
-<h3>★ PREMIUM QUALITY</h3>
-<p>Best quality products</p>
-</div>
+(out/"index.html").write_text(html, encoding="utf-8")
+shutil.copy("/mnt/data/shree-shyam-logo.png", out/"shree-shyam-logo.png")
+shutil.copy("/mnt/data/shyam-canvas-store.png", out/"shyam-canvas-store.png")
+# Product folder intentionally omitted because user has not supplied the 20 real product files.
+zip_path = Path("/mnt/data/shree-shyam-final-site.zip")
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    for p in out.iterdir():
+        z.write(p, p.name)
+print(zip_path)
 
-<div class="feature">
-<h3>✦ WIDE RANGE</h3>
-<p>All types of canvas products</p>
-</div>
-
-<div class="feature">
-<h3>🤝 WHOLESALE & RETAIL</h3>
-<p>For all your needs</p>
-</div>
-
-<div class="feature">
-<h3>🚚 FAST SERVICE</h3>
-<p>Quick response</p>
-</div>
-
-<div class="feature">
-<h3>₹ BEST PRICES</h3>
-<p>Affordable prices</p>
-</div>
-
-</section>
-
-
-<!-- CONTACT -->
-<section class="contact">
-
-<div class="contact-grid">
-
-<div class="contact-box">
-<div class="icon">📞</div>
-<div>
-<h3>Call Us</h3>
-<p>8000379250<br>Call for product details</p>
-</div>
-</div>
-
-<div class="contact-box">
-<div class="icon">🟢</div>
-<div>
-<h3>WhatsApp Us</h3>
-<p>8000379250<br>Message us for details</p>
-</div>
-</div>
-
-<div class="contact-box">
-<div class="icon">📍</div>
-<div>
-<h3>Our Address</h3>
-<p>
-Karmishar Fanta, Jaisalmer Road,<br>
-Bikaner, Rajasthan - 334001
-</p>
-</div>
-
-<a class="direction"
-href="https://www.google.com/maps/search/?api=1&query=Karmishar+Fanta+Jaisalmer+Road+Bikaner+Rajasthan+334001"
-target="_blank">
-Get Directions
-</a>
-
-</div>
-
-</div>
-</section>
-
-
-<!-- FOOTER -->
-<footer>
-<h2>SHREE SHYAM CANVAS STORE</h2>
-<p>Strong • Durable • Reliable</p>
-<p>© 2026 Shree Shyam Canvas Store. All Rights Reserved.</p>
-</footer>
-
-
-<!-- WHATSAPP -->
-<a class="whatsapp"
-href="https://wa.me/918000379250"
-target="_blank">
-🟢
-</a>
-
-</body>
-</html>
